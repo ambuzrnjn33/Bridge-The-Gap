@@ -1,0 +1,28 @@
+{
+  "name": "btp-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "gridfs-stream": "^1.1.1",
+    "jquery": "^3.3.1",
+    "method": "^2.0.0",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.4.22",
+    "multer": "^1.4.1",
+    "multer-gridfs-storage": "^3.2.3",
+    "override": "0.0.1",
+    "path": "^0.12.7",
+    "virtual-keyboard": "^1.28.9"
+  }
+}
