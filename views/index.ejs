@@ -199,8 +199,11 @@ width:700; height:394;}
   <script>
 function play(){
     var msg=document.getElementById("write").innerHTML;
+<<<<<<< HEAD
     var checkbox = document.getElementById('enable_keyboard');
     if (checkbox.checked == true){
+=======
+>>>>>>> origin/master
     var str = '';
 
       for (var i = 0; i < msg.length; i++) {
@@ -223,6 +226,7 @@ function play(){
       var url = "https://www.handspeak.com/word/" + fch + "/" + str + ".mp4";
       console.log(url);
       UrlExists(url);
+<<<<<<< HEAD
     }else{
     console.log(msg);
     var vlen=msg.length,j=0;
@@ -232,6 +236,15 @@ function play(){
   console.log(url);
   UrlExists(url);
 }
+=======
+  // console.log(msg);
+  //   var vlen=msg.length,j=0;
+  //   var fch=msg.charAt(0);
+  //   console.log(fch);
+  // var url = "https://www.handspeak.com/word/"+fch+"/"+msg+".mp4";
+  // console.log(url);
+  // UrlExists(url);
+>>>>>>> origin/master
 function UrlExists(url) {
    var http = new XMLHttpRequest();
    http.open('HEAD', url, false);
@@ -271,10 +284,15 @@ function UrlExists(url) {
   var src = document.createAttribute("src");
   var imgdiv=document.getElementById("imgdiv");
   imgdiv.appendChild(image);
+<<<<<<< HEAD
   var i=0,timeout=3200;
   var ch;
   if(checkbox.checked==true){
   var len=str.length;
+=======
+  var i=0,len=str.length,timeout=3200;
+  var ch;
+>>>>>>> origin/master
   var intervalObject = setInterval(function () {
           ch=str.charAt(i);
           console.log(ch);
@@ -298,6 +316,7 @@ function UrlExists(url) {
           }
       }, timeout);
 
+<<<<<<< HEAD
 }else{
   var len=msg.length
   var intervalObject = setInterval(function () {
@@ -323,6 +342,8 @@ function UrlExists(url) {
           }
       }, timeout);
 }
+=======
+>>>>>>> origin/master
 }//else close
 
 }//urlExists  close
