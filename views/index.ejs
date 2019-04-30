@@ -1,564 +1,379 @@
-<!--
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-    crossorigin="anonymous">
-  <style>
-
-  </style>
-  <script>
-function play(){
-    var msg=document.getElementById("textbox").value;
-    console.log(msg);
-    var vlen=msg.length,j=0;
-
-
-
-    var fch=msg.charAt(0);
-    console.log(fch);
-  var url = "https://www.handspeak.com/word/"+fch+"/"+msg+".mp4";
-  console.log(url);
-  UrlExists(url);
-/*  if(word.length==vlen){break;}
-  else {j=(word.legth)+1;}*/
-
-function UrlExists(url) {
-   var http = new XMLHttpRequest();
-   http.open('HEAD', url, false);
-   http.send();
-   console.log(http.status);
-   if (http.status != 403)
-       //  if the video is available
-       {
-
-         var video=document.getElementById('video');
-      var source=document.createElement('source');
-      var vsrc = document.createAttribute("src");
-          var sid = document.createAttribute("id");
-           var type = document.createAttribute("type");
-              sid.value="sid";
-              type.value="video/mp4";
-
-         vsrc.value=url;
-      source.setAttributeNode(vsrc);
-      source.setAttributeNode(type);
-
-         video.appendChild(source);
-      video.style.visibility="visible";
-
-    }// http status checking if close
-   else
-
-{
-//fingerspelling
-  var image=document.createElement("img");
-  var id=document.createAttribute("id");
-  id.value="img";
-    image.setAttributeNode(id);
-  var src = document.createAttribute("src");
-  document.body.appendChild(image);
-  var i=0,len=msg.length,timeout=3600;
-  var ch;
-  var intervalObject = setInterval(function () {
-          ch=msg.charAt(i);
-          console.log(ch);
-          if(ch!=" ")
-          {
-          src.value = "/message/"+ch;
-          timeout=4000;
-        }
-
-          else if(ch==" ")
-          {
-            src.value="https://chhattisgarh.mygov.in/sites/default/files/blank_0.jpg";
-            timeout=3000;
-          }
-          image.setAttributeNode(src);
-        //  console.log(count, 'seconds passed');
-        i++;
-          if (i == len) {
-              console.log('exiting');
-              clearInterval(intervalObject);
-          }
-      }, timeout);
-
-}//else close
-
-}//urlExists  close
-
-
-}//play()close
-
-
-
-  function remove(){
-
-    var img =document.getElementById("img");
-    var video=document.getElementById("video");
-    var source=document.getElementById("source");
-    if(img){
-    img.parentNode.removeChild(img);}
-
-  }
-
-  </script>
-  <title>Mongo File Uploads</title>
-</head>
-
-<body>
-<input type="text" id="textbox" name="message">
-<button value="play" onclick="play()">play</button>
-<button value="ok" onclick="remove()">Clear</button>
-<video width="320" height="240" id="video" style="visibility:hidden" autoplay loop></vedio>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-    crossorigin="anonymous"></script>
-</body>
-
-</html>-->
 <html>
-<head>
-    <link rel="stylesheet" type="text/css" href="keystyle.css" />
-<link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto'>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
-<!-- jQuery library -->
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+    <head>
+        <link rel="stylesheet" type="text/css" href="keystyle.css" />
+    <!--<link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto'>-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <!-- jQuery library -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+    <script src="https://code.responsivevoice.org/responsivevoice.js"></script>
 
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="keyboard.js"></script>
-<style>
-  
-body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
-
-body, html {
-  height: 100%;
-  line-height: 1.8;
-}
-#img{
-width:700; height:394;}
-
-/* Full height image header */
-.bgimg-1 {
-  background-position: center;
-  background-size: cover;
-  background-image: url("http://www.liveonbeauty.org/upload/2018/09/08/blue-light-rays-and-snow-hd-motion-graphics-background-ray-lighting-l-aba7aabcad349c80.jpg");
-  min-height: 100%;
-}
-
-.w3-bar .w3-button {
-  padding: 16px;
-  float: left;
-}
-.webflow-style-input input {
-  flex-grow: 1;
-  color: $input-text-active;
-  font-size: 1.5rem;
-  line-height: 2.4rem;
-  vertical-align: middle;
-  &::-webkit-input-placeholder {
-    color: $input-text-inactive;
-  }
-}
-
-  .one{
-    background-color: green !important;
-    width: 1000px;
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway"-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="keyboard.js"></script>
+    <style>
+    
+    body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+    
+    body, html {
+      height: 100%;
+      line-height: 1.8;
     }
-    .red{
-      color: red;
+    #img{
+    width:100; height:100;}
+    
+    /* Full height image header */
+    .bgimg-1 {
+      background-position: center;
+      background-size: cover;
+      background-image: url("http://www.liveonbeauty.org/upload/2018/09/08/blue-light-rays-and-snow-hd-motion-graphics-background-ray-lighting-l-aba7aabcad349c80.jpg");
+      min-height: 100%;
     }
-  .navbar li { color: #000 }
-.navbar .navbar-nav > li > a:hover{
-    color: green !important;
-}
-.navbar .navbar-nav > li >a{
-    color: orange!important;
-}
-/*body{
-  font-family:'Roboto', sans-serif;
-}*/
-  </style>
-
-  <script>
-function play(){
-    var msg=document.getElementById("write").innerHTML;
-<<<<<<< HEAD
-    var checkbox = document.getElementById('enable_keyboard');
-    if (checkbox.checked == true){
-=======
->>>>>>> origin/master
-    var str = '';
-
-      for (var i = 0; i < msg.length; i++) {
-        var idx = msg.indexOf('src', i);
-        if (idx == -1) {
-          break;
-        }
-        str += msg[idx + 5];
-        i = idx;
-        console.log(i);
+    
+    .w3-bar .w3-button {
+      padding: 16px;
+      float: left;
+    }
+    .webflow-style-input input {
+      flex-grow: 1;
+      color: $input-text-active;
+      font-size: 1.5rem;
+      line-height: 2.4rem;
+      vertical-align: middle;
+      &::-webkit-input-placeholder {
+        color: $input-text-inactive;
       }
-
-      console.log(str);
-
-
-      var vlen = msg.length,
-        j = 0;
-      var fch = str.charAt(0);
-      console.log(fch);
-      var url = "https://www.handspeak.com/word/" + fch + "/" + str + ".mp4";
-      console.log(url);
-      UrlExists(url);
-<<<<<<< HEAD
-    }else{
-    console.log(msg);
-    var vlen=msg.length,j=0;
-    var fch=msg.charAt(0);
-    console.log(fch);
-  var url = "https://www.handspeak.com/word/"+fch+"/"+msg+".mp4";
-  console.log(url);
-  UrlExists(url);
-}
-=======
-  // console.log(msg);
-  //   var vlen=msg.length,j=0;
-  //   var fch=msg.charAt(0);
-  //   console.log(fch);
-  // var url = "https://www.handspeak.com/word/"+fch+"/"+msg+".mp4";
-  // console.log(url);
-  // UrlExists(url);
->>>>>>> origin/master
-function UrlExists(url) {
-   var http = new XMLHttpRequest();
-   http.open('HEAD', url, false);
-   http.send();
-   console.log(http.status);
-   if (http.status != 403)
-       //  if the video is available
-       {
-
-         var video=document.getElementById('video');
-      var source=document.createElement('source');
-      var vsrc = document.createAttribute("src");
-          var sid = document.createAttribute("id");
-           var type = document.createAttribute("type");
-              sid.value="sid";
-              type.value="video/mp4";
-
-         vsrc.value=url;
-      source.setAttributeNode(vsrc);
-      source.setAttributeNode(type);
-
-         video.appendChild(source);
-      video.style.visibility="visible";
-
-    }// http status checking if close
-   else
-
-{
-//fingerspelling
-  var image=document.createElement("img");
-  var id=document.createAttribute("id");
-  id.value="img";
-  var class1=document.createAttribute("class");
-  class1.value="w3-image w3-round-large";
-    image.setAttributeNode(id);
-    image.setAttributeNode(class1);
-  var src = document.createAttribute("src");
-  var imgdiv=document.getElementById("imgdiv");
-  imgdiv.appendChild(image);
-<<<<<<< HEAD
-  var i=0,timeout=3200;
-  var ch;
-  if(checkbox.checked==true){
-  var len=str.length;
-=======
-  var i=0,len=str.length,timeout=3200;
-  var ch;
->>>>>>> origin/master
-  var intervalObject = setInterval(function () {
-          ch=str.charAt(i);
-          console.log(ch);
-          if(ch!=" ")
-          {
-          src.value = "/message/"+ch;
-          timeout=3200;
-        }
-
-          else if(ch==" ")
-          {
-            src.value="https://chhattisgarh.mygov.in/sites/default/files/blank_0.jpg";
-            timeout=3000;
-          }
-          image.setAttributeNode(src);
-        //  console.log(count, 'seconds passed');
-        i++;
-          if (i == len) {
-              console.log('exiting');
-              clearInterval(intervalObject);
-          }
-      }, timeout);
-
-<<<<<<< HEAD
-}else{
-  var len=msg.length
-  var intervalObject = setInterval(function () {
-          ch=msg.charAt(i);
-          console.log(ch);
-          if(ch!=" ")
-          {
-          src.value = "/message/"+ch;
-          timeout=3200;
-        }
-
-          else if(ch==" ")
-          {
-            src.value="https://chhattisgarh.mygov.in/sites/default/files/blank_0.jpg";
-            timeout=3000;
-          }
-          image.setAttributeNode(src);
-        //  console.log(count, 'seconds passed');
-        i++;
-          if (i == len) {
-              console.log('exiting');
-              clearInterval(intervalObject);
-          }
-      }, timeout);
-}
-=======
->>>>>>> origin/master
-}//else close
-
-}//urlExists  close
-
-
-}//play()close
-
-
-
-  function remove(){
-
-    var img =document.getElementById("img");
-    var video=document.getElementById("video");
-    var source=document.getElementById("source");
-    if(img){
-    img.parentNode.removeChild(img);}
-
-  }
-
-
-
-  </script>
-
-</head>
-<div class="w3-top">
-  <div class="w3-bar w3-white w3-card" id="myNavbar">
-    <a href="#home" class="w3-bar-item w3-button w3-wide">BTG</a>
-    <!-- Right-sided navbar links -->
-    <div class="w3-right w3-hide-small">
-      <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
-      <a href="#team" class="w3-bar-item w3-button"><i class="fa fa-user"></i> TEAM</a>
-
-
-    </div></div>
-  </div>
-
-
-<!--   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </nav>-->
-    <body>
-
-    <!--    <div class="jumbotron jumbotron-fluid">
-
-            <h1 class="display-4">Bridge The Gap.</h1>
-            <p class="lead">An easy way to Interact with those who are differently abled and want to understand our language in their own ways.</p>
-            <hr class="my-4">
-            <p>IConverse in easy and simple steps.</p>
-            <p class="lead">
-            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-            </p>
-          </div> -->
-          <header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
-  <div class="w3-display-left w3-text-white" style="padding:48px">
-    <span class="w3-jumbo w3-hide-small">BRIDGE THE GAP</span><br>
-    <span class="w3-xxlarge w3-hide-large w3-hide-medium">Start something that matters</span><br>
-    <span class="w3-large">An easy way to interact and share your thoughts no matter what kind of language you understand .</span>
-    <div class="webflow-style-input">
-
-    <!-- textbox & keyboard -->
-      <div id="container">
-        <div id="write" contenteditable="true"></div>
-        <ul id="keyboard" style="display:none">
-            <li class="symbol"><span class="off">`</span><span class="on">~</span></li>
-            <li class="symbol"><span class="off"><img src="1.png" height="40px" width="40px"></span><span
-                    class="on">!</span></li>
-            <li class="symbol"><span class="off"><img src="2.png" height="40px" width="40px"></span><span
-                    class="on">@</span></li>
-            <li class="symbol"><span class="off"><img src="3.png" height="40px" width="40px"></span><span
-                    class="on">#</span></li>
-            <li class="symbol"><span class="off"><img src="4.png" height="40px" width="40px"></span><span
-                    class="on">$</span></li>
-            <li class="symbol"><span class="off"><img src="5.png" height="40px" width="40px"></span><span
-                    class="on">%</span></li>
-            <li class="symbol"><span class="off"><img src="6.png" height="40px" width="40px"></span><span
-                    class="on">^</span></li>
-            <li class="symbol"><span class="off"><img src="7.png" height="40px" width="40px"></span><span
-                    class="on">&amp;</span></li>
-            <li class="symbol"><span class="off"><img src="8.png" height="40px" width="40px"></span><span
-                    class="on">*</span></li>
-            <li class="symbol"><span class="off"><img src="9.png" height="40px" width="40px"></span><span
-                    class="on">(</span></li>
-            <li class="symbol"><span class="off"><img src="0.png" height="40px" width="40px"></span><span
-                    class="on">)</span></li>
-            <li class="symbol"><span class="off">-</span><span class="on">_</span></li>
-            <li class="symbol"><span class="off">=</span><span class="on">+</span></li>
-            <li class="delete lastitem">delete</li>
-            <li class="tab">tab</li>
-            <li class="letter"><img src="q.png" height="40px" width="40px"></li>
-            <li class="letter"><img src="w.png" height="40px" width="40px"></li>
-            <li class="letter"><img src="e.png" height="40px" width="40px"></li>
-            <li class="letter"><img src="r.png" height="40px" width="40px"></li>
-            <li class="letter"><img src="t.png" height="40px" width="40px"></li>
-            <li class="letter"><img src="y.png" height="40px" width="40px"></li>
-            <li class="letter"><img src="u.png" height="40px" width="40px"></li>
-            <li class="letter"><img src="i.png" height="40px" width="40px"></li>
-            <li class="letter"><img src="o.png" height="40px" width="40px"></li>
-            <li class="letter"><img src="p.png" height="40px" width="40px"></li>
-            <li class="symbol"><span class="off">[</span><span class="on">{</span></li>
-            <li class="symbol"><span class="off">]</span><span class="on">}</span></li>
-            <li class="symbol lastitem"><span class="off">\</span><span class="on">|</span></li>
-            <li class="capslock">caps lock</li>
-            <li class="letter"><img src="a.png" height="40px" width="40px"></li>
-            <li class="letter"><img src="s.png" height="40px" width="40px"></li>
-            <li class="letter"><img src="d.png" height="40px" width="40px"></li>
-            <li class="letter"><img src="f.png" height="40px" width="40px"></li>
-            <li class="letter"><img src="g.png" height="40px" width="40px"></li>
-            <li class="letter"><img src="h.png" height="40px" width="40px"></li>
-            <li class="letter"><img src="j.png" height="40px" width="40px"></li>
-            <li class="letter"><img src="k.png" height="40px" width="40px"></li>
-            <li class="letter"><img src="l.png" height="40px" width="40px"></li>
-            <li class="symbol"><span class="off">;</span><span class="on">:</span></li>
-            <li class="symbol"><span class="off">'</span><span class="on">&quot;</span></li>
-            <li class="enter lastitem">enter</li>
-            <li class="left-shift">shift</li>
-            <li class="letter"><img src="z.png" height="40px" width="40px"></li>
-            <li class="letter"><img src="x.png" height="40px" width="40px"></li>
-            <li class="letter"><img src="c.png" height="40px" width="40px"></li>
-            <li class="letter"><img src="v.png" height="40px" width="40px"></li>
-            <li class="letter"><img src="b.png" height="40px" width="40px"></li>
-            <li class="letter"><img src="n.png" height="40px" width="40px"></li>
-            <li class="letter"><img src="m.png" height="40px" width="40px"></li>
-            <li class="symbol"><span class="off">,</span><span class="on">&lt;</span></li>
-            <li class="symbol"><span class="off">.</span><span class="on">&gt;</span></li>
-            <li class="symbol"><span class="off">/</span><span class="on">?</span></li>
-            <li class="right-shift lastitem">shift</li>
-            <li class="space lastitem">space&nbsp;</li>
-        </ul>
-    </div>
-    <br><br><br><br><br><br>
-    <input type="checkbox" name="enable_keyboard" onclick="showKeyboard()" id="enable_keyboard"> Enable On-Screen Keyboard
+    }
     
-    <br><br>
-    <p><button value="play" onclick="play()" style="opacity:0.5"><a href="#show"  style="margin-top:5px; float:left"class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">PLAY THE MESSAGE</a></button></p>
-  </div>
-
-</header>
-    <!--  <div class="conatiner">
-      <div class="row">
-        <div class="col-md-12 m-auto">
-          <div class="form-group shadow-textarea">
-<label for="Message" class="red">Write Your Message Here</label>
-<textarea class="form-control" id="textbox" rows="6" ></textarea>
-</div>
-  </div>
-</div>-->
-<!--<div class="container-fluid">
-<div class="row">
-     <div class="col-m-4">
-        <button class="btn btn-primary btn-lg" onclick="play()">Play</button>
-    </div>
-    <div class="col-md-4 text-right">
-        <button class="btn btn-primary btn-lg">Send</button>
-    </div>
-    <div class="col-md-4 text-right">
-        <button class="btn btn-primary btn-lg" onclick="remove()">Clear</button>
-    </div>
-    </div>
-    </div>
-
-      <div id="imgdiv">
-
+      .one{
+        background-color: green !important;
+        width: 1000px;
+        }
+        .red{
+          color: red;
+        }
+    
+      </style>
+    
+      <script>
+     function play(x){
+        var msg=document.getElementById("write").innerHTML;
+        msg=msg.toLowerCase();
+        var checkbox = document.getElementById('enable_keyboard');
+        if (checkbox.checked == true){
+        var str = '';
+    
+          for (var i = 0; i < msg.length; i++) {
+            var idx = msg.indexOf('src', i);
+            if (idx == -1) {
+              break;
+            }
+            str += msg[idx + 5];
+            i = idx;
+            console.log(i);
+          }
+    
+          console.log(str);
+    hear(str);
+    
+          var vlen = str.length,
+            j = x;
+            var word="";
+            while(j<vlen){
+              if(str.charAt(j)!=''){
+              word+=str.charAt(j);}
+             if(str.charAt(j)==''||j==vlen-1){
+              // r=display(word,x);
+              word="";
+              break;
+            }
+            ++j;
+          }}
+    
+        else{
+    document.getElementById('a').href="#show";
+        console.log(msg);
+        var wlen=msg.length,k=x;
+        var word="";
+        while(k<wlen){
+          if(msg.charAt(k)!=' '){
+            word+=msg.charAt(k);}
+          if(msg.charAt(k)==' '||k==wlen-1){
+            console.log(word);
+            display(word,x);
+    
+              word="";
+              break;
+            }
+        ++k;
+          }
+    
+    }
+    }//play()close
+    
+    function display(word,x)
+    {
+    
+    console.log(word);
+    var fch = word.charAt(0);
+    console.log(fch);
+    var url = "https://www.handspeak.com/word/" + fch + "/" + word + ".mp4";
+    console.log(url);
+    UrlExists(url,word,x);
+    
+    }
+    function UrlExists(url,word,x) {
+      console.log("in url exist function"+word)
+    var len= word.length;
+    var strLn=len+x;
+       var http = new XMLHttpRequest();
+       http.open('HEAD', url, false);
+       http.send();
+       console.log(http.status);
+    
+    
+    
+       if (http.status != 403)
+           //  if the video is available
+           {
+    
+             var video=document.getElementById('video');
+          var source=document.createElement('source');
+          var vsrc = document.createAttribute("src");
+              var sid = document.createAttribute("id");
+               var type = document.createAttribute("type");
+                  sid.value="sid";
+                  type.value="video/mp4";
+    
+             vsrc.value=url;
+          source.setAttributeNode(vsrc);
+          source.setAttributeNode(type);
+    source.setAttributeNode(sid);
+             video.appendChild(source);
+          video.style.visibility="visible";
+           play(strLn);
+           
+        }// http status checking if close
+       else
+    
+    {
+    //fingerspelling
+    var promise= new Promise(function(resolve,report){
+      var i=0,timeout=1200;
+      var ch;
+    
+      var len=word.length;
+    
+    
+    var intervalObject = setInterval(function () {
+              ch=word.charAt(i);
+              console.log(ch);
+              if(ch!=" ")
+              {
+                          var image=document.createElement("img");
+                          var id=document.createAttribute("id");
+                          id.value="img";
+                          var class1=document.createAttribute("class");
+                          class1.value="myimg";
+                            image.setAttributeNode(id);
+                            image.setAttributeNode(class1);
+                          var src = document.createAttribute("src");
+                          var imgdiv=document.getElementById("imgdiv");
+                          imgdiv.appendChild(image);
+              //src.value = "/message/"+ch;
+      src.value=ch+".png";
+      console.log(src);
+              image.setAttributeNode(src);
+            }
+      i++;
+    
+            if (i == len+1) {
+                  console.log('exiting');
+    
+                  clearInterval(intervalObject);
+                  resolve("done");
+    
+              }
+    
+          }, timeout);
+    if(i>len){reject("yo");}
+    });//promise close
+    promise.then(function(successMessage) {
+      imgdiv=document.getElementById('imgdiv');
+      while(imgdiv.hasChildNodes()) {
+    imgdiv.removeChild(imgdiv.childNodes[0]);
+    }
+                play(strLn+1);
+    
+            console.log(successMessage);
+        }, function(errorMessage) {
+           //error handler function is invoked
+            console.log(errorMessage);
+        }) ;
+    }//else close
+    
+    
+    
+    }//urlExists  close
+    
+    
+    
+    
+      function remove(){
+    
+        var img =document.getElementById("img");
+        var video=document.getElementById("video");
+        var source=document.getElementById("source");
+        if(img){
+        img.parentNode.removeChild(img);}
+    
+      }
+    
+    
+    
+      </script>
+    
+    </head>
+    
+    
+        <body>
+    <!-- NAvbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">BTG</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Team</a>
+          </li>
+    
+        </ul>
       </div>
-      <video width="320" height="240" id="video" style="visibility:hidden" autoplay loop></vedio>
-
-</div>-->
-<div class="w3-container w3-light-grey" style="padding:128px 16px" id="show">
-  <div class="w3-row-padding">
-    <div class="w3-col m6">
-      <h3></h3>
-
-
-      <p><button><a href="#" class="w3-button w3-black"><i class="fa fa-th"> </i> Send</a></button></p>
-        <p><button onclick="remove()"><a href="#" class="w3-button w3-black"><i class="fa fa-th"> </i> Clear</a></button></p>
+    </nav>
+    <!-- End of NAvbar -->
+              <header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
+      <div class="w3-display-left w3-text-white" style="padding:48px">
+        <span class="w3-jumbo w3-hide-small">BRIDGE THE GAP</span><br>
+        <span class="w3-xxlarge w3-hide-large w3-hide-medium">Start something that matters</span><br>
+        <span class="w3-large">An easy way to interact and share your thoughts no matter what kind of language you understand .</span>
+        <div class="webflow-style-input">
+    
+        <!-- textbox & keyboard -->
+          <div id="container">
+            <div id="write" contenteditable="true"></div>
+            <ul id="keyboard" style="display:none">
+                <li class="symbol"><span class="off">`</span><span class="on">~</span></li>
+                <li class="symbol"><span class="off"><img src="1.png" height="40px" width="40px"></span><span
+                        class="on">!</span></li>
+                <li class="symbol"><span class="off"><img src="2.png" height="40px" width="40px"></span><span
+                        class="on">@</span></li>
+                <li class="symbol"><span class="off"><img src="3.png" height="40px" width="40px"></span><span
+                        class="on">#</span></li>
+                <li class="symbol"><span class="off"><img src="4.png" height="40px" width="40px"></span><span
+                        class="on">$</span></li>
+                <li class="symbol"><span class="off"><img src="5.png" height="40px" width="40px"></span><span
+                        class="on">%</span></li>
+                <li class="symbol"><span class="off"><img src="6.png" height="40px" width="40px"></span><span
+                        class="on">^</span></li>
+                <li class="symbol"><span class="off"><img src="7.png" height="40px" width="40px"></span><span
+                        class="on">&amp;</span></li>
+                <li class="symbol"><span class="off"><img src="8.png" height="40px" width="40px"></span><span
+                        class="on">*</span></li>
+                <li class="symbol"><span class="off"><img src="9.png" height="40px" width="40px"></span><span
+                        class="on">(</span></li>
+                <li class="symbol"><span class="off"><img src="0.png" height="40px" width="40px"></span><span
+                        class="on">)</span></li>
+                <li class="symbol"><span class="off">-</span><span class="on">_</span></li>
+                <li class="symbol"><span class="off">=</span><span class="on">+</span></li>
+                <li class="delete lastitem">delete</li>
+                <li class="tab">tab</li>
+                <li class="letter"><img src="q.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="w.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="e.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="r.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="t.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="y.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="u.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="i.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="o.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="p.png" height="40px" width="40px"></li>
+                <li class="symbol"><span class="off">[</span><span class="on">{</span></li>
+                <li class="symbol"><span class="off">]</span><span class="on">}</span></li>
+                <li class="symbol lastitem"><span class="off">\</span><span class="on">|</span></li>
+                <li class="capslock">caps lock</li>
+                <li class="letter"><img src="a.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="s.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="d.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="f.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="g.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="h.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="j.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="k.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="l.png" height="40px" width="40px"></li>
+                <li class="symbol"><span class="off">;</span><span class="on">:</span></li>
+                <li class="symbol"><span class="off">'</span><span class="on">&quot;</span></li>
+                <li class="enter lastitem">enter</li>
+                <li class="left-shift">shift</li>
+                <li class="letter"><img src="z.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="x.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="c.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="v.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="b.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="n.png" height="40px" width="40px"></li>
+                <li class="letter"><img src="m.png" height="40px" width="40px"></li>
+                <li class="symbol"><span class="off">,</span><span class="on">&lt;</span></li>
+                <li class="symbol"><span class="off">.</span><span class="on">&gt;</span></li>
+                <li class="symbol"><span class="off">/</span><span class="on">?</span></li>
+                <li class="right-shift lastitem">shift</li>
+                <li class="space lastitem">space&nbsp;</li>
+            </ul>
+        </div>
+        <br><br><br><br><br><br>
+        <input type="checkbox" name="enable_keyboard" onclick="showKeyboard()" id="enable_keyboard"> Enable On-Screen Keyboard
+    
+        <br><br>
+        <p><button class="btn btn-lg btn-danger" value="play" onclick="play(0)" style="opacity:0.5"><a  id="a" href="#"  style="margin-top:5px; float:left">PLAY THE MESSAGE</a></button></p>
+        <button class="mi fa fa-microphone" onclick="startDictation()"></button>
+        <button class="mi fa fa-volume-up" onclick="hear()"></button>
+        <script src="index.js"></script>
+      </div>
+    
+    </header>
+    
+    <div class="container-fluid" style="padding:128px 16px" id="show">
+      <div class="row">
+        <div class="col-md-8">
+    
+      <div id="imgdiv">
+    
+        </div>
+      </div>
+        <div class="col-md-4">
+        <div>
+          <video width="300" height="204" id="video" style="visibility:hidden" autoplay loop></vedio>
+        </div>
     </div>
-    <div class="w3-col m6" id="imgdiv">
-
-    </div>
-    <div>
-      <video width="600" height="450" id="video" style="visibility:hidden" autoplay loop></vedio>
-    </div>
-
-  </div>
-</div>
- </body>
-
-</html>
+    
+    
+    </div></div>
+    <p><button class="btn btn-danger btn-lg" onclick="remove()"><a href="#"><i class="fa fa-th"> </i> Clear</a></button></p>
+     </body>
+    
+    </html>
+    

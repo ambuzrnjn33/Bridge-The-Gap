@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>
+      WebSock
+    </title>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.dev.js"></script>
+   
+
+    <link href="/styles.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="/keystyle.css" />
+  </head>
+  <body>
+    <div id="chat">
+      <div id="chat-window">
+       <div id="output"> 
+       </div>
+       <div id="feedback"></div>
+    </div>
+    <input type="checkbox" name="enable_keyboard" onclick="showKeyboard()" id="enable_keyboard"> Enable On-Screen Keyboard
+    <div id="container">
+        <!-- <div id="write" contenteditable="true"></div> -->
+        <ul id="keyboard" style="display:none">
+            <li class="symbol"><span class="off">`</span><span class="on">~</span></li>
+            <li class="symbol"><span class="off"><img src="1.png" height="40px" width="40px"></span><span
+                    class="on">!</span></li>
+            <li class="symbol"><span class="off"><img src="2.png" height="40px" width="40px"></span><span
+                    class="on">@</span></li>
+            <li class="symbol"><span class="off"><img src="3.png" height="40px" width="40px"></span><span
+                    class="on">#</span></li>
+            <li class="symbol"><span class="off"><img src="4.png" height="40px" width="40px"></span><span
+                    class="on">$</span></li>
+            <li class="symbol"><span class="off"><img src="5.png" height="40px" width="40px"></span><span
+                    class="on">%</span></li>
+            <li class="symbol"><span class="off"><img src="6.png" height="40px" width="40px"></span><span
+                    class="on">^</span></li>
+            <li class="symbol"><span class="off"><img src="7.png" height="40px" width="40px"></span><span
+                    class="on">&amp;</span></li>
+            <li class="symbol"><span class="off"><img src="8.png" height="40px" width="40px"></span><span
+                    class="on">*</span></li>
+            <li class="symbol"><span class="off"><img src="9.png" height="40px" width="40px"></span><span
+                    class="on">(</span></li>
+            <li class="symbol"><span class="off"><img src="0.png" height="40px" width="40px"></span><span
+                    class="on">)</span></li>
+            <li class="symbol"><span class="off">-</span><span class="on">_</span></li>
+            <li class="symbol"><span class="off">=</span><span class="on">+</span></li>
+            <li class="delete lastitem">delete</li>
+            <li class="tab">tab</li>
+            <li class="letter"><img src="q.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="w.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="e.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="r.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="t.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="y.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="u.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="i.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="o.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="p.png" height="40px" width="40px"></li>
+            <li class="symbol"><span class="off">[</span><span class="on">{</span></li>
+            <li class="symbol"><span class="off">]</span><span class="on">}</span></li>
+            <li class="symbol lastitem"><span class="off">\</span><span class="on">|</span></li>
+            <li class="capslock">caps lock</li>
+            <li class="letter"><img src="a.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="s.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="d.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="f.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="g.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="h.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="j.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="k.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="l.png" height="40px" width="40px"></li>
+            <li class="symbol"><span class="off">;</span><span class="on">:</span></li>
+            <li class="symbol"><span class="off">'</span><span class="on">&quot;</span></li>
+            <li class="enter lastitem">enter</li>
+            <li class="left-shift">shift</li>
+            <li class="letter"><img src="z.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="x.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="c.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="v.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="b.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="n.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="m.png" height="40px" width="40px"></li>
+            <li class="symbol"><span class="off">,</span><span class="on">&lt;</span></li>
+            <li class="symbol"><span class="off">.</span><span class="on">&gt;</span></li>
+            <li class="symbol"><span class="off">/</span><span class="on">?</span></li>
+            <li class="right-shift lastitem">shift</li>
+            <li class="space lastitem">space&nbsp;</li>
+        </ul>
+    </div>
+    <input id="handle" type="text" placeholder="Name"/>
+<input id="message" type="text" placeholder="Message" contenteditable="true"/>
+<button id="send">Send</button>
+  </div>
+   <script src="/chat.js"></script>
+   <script src="/keyboard.js"></script>
+  </body>
+</html>
