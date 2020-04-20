@@ -1,0 +1,208 @@
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+<head>
+<link rel="stylesheet" type="text/css" href="keystyle.css" />
+    <!--<link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Roboto'>-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    
+    <!-- jQuery library -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+    <script src="https://code.responsivevoice.org/responsivevoice.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway"-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="keyboard.js"></script>
+    <style>
+    
+    body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+    #write
+    {
+        box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.1);
+    }
+    body, html {
+      height: 100%;
+      line-height: 1.8;
+      
+
+  background: -webkit-linear-gradient(330deg, #000, #f0a6ca);
+  background: linear-gradient(120deg, #000, #f0a6ca);
+  overflow: hidden;
+
+    }
+    #img{
+    width:100; height:100;}
+    
+    /* Full height image header */
+    .bgimg-1 {
+      background-position: center;
+      background-size: cover;
+      background-image: url("http://www.liveonbeauty.org/upload/2018/09/08/blue-light-rays-and-snow-hd-motion-graphics-background-ray-lighting-l-aba7aabcad349c80.jpg");
+      min-height: 100%;
+    }
+    
+    .w3-bar .w3-button {
+      padding: 16px;
+      float: left;
+    }
+    
+      .one{
+        background-color: green !important;
+        width: 1000px;
+        }
+        .red{
+          color: red;
+        }
+    
+      </style>
+      <script src="/js/play.js"></script>
+<script>
+	var socket = io.connect('http://localhost:5000');
+
+	// on connection to server, ask for user's name with an anonymous callback
+	socket.on('connect', function(){
+        // call the server-side function 'adduser' and send one parameter (value of prompt)
+         var username=prompt("enter your chat NAme");
+           
+        
+        console.log(username);
+		socket.emit('adduser', username);
+	});
+
+	// listener, whenever the server emits 'updatechat', this updates the chat body
+	socket.on('updatechat', function (username, data) {
+        data=data.toLowerCase();
+        $('#conversation').append('<b>'+username + ':</b> ' )
+        play(data,0)
+	
+	});
+    socket.on('connected',(username,data)=>
+    {
+        $('#conversation').append('<b>'+username + ':</b> ' + data + '<br>');
+    })
+	// listener, whenever the server emits 'updateusers', this updates the username list
+	socket.on('updateusers', function(data) {
+		$('#users').empty();
+		$.each(data, function(key, value) {
+			$('#users').append('<div>' + key + '</div>');
+		});
+	});
+
+	// on load of page
+	$(function(){
+		// when the client clicks SEND
+		$('#datasend').click( function() {
+			var message = $('#write').val();
+			$('#write').val('');
+			// tell server to execute 'sendchat' and send along one parameter
+			socket.emit('sendchat', message);
+		});
+
+		// when the client hits ENTER on their keyboard
+		$('#data').keypress(function(e) {
+			if(e.which == 13) {
+				$(this).blur();
+				$('#datasend').focus().click();
+			}
+		});
+	});
+
+</script>
+</head>
+<body >
+<div style="float:right;width:100px;border-left:1px solid whitesmoke;height:300px;padding:10px;overflow:scroll-y;">
+	<b>USERS</b>
+	<div id="users"></div>
+</div>
+<div >
+    <div id="conversation"style ="color:white"></div>
+     <!-- textbox & keyboard -->
+     <div id="container">
+        <input id="write" contenteditable="true"></div>
+        <ul id="keyboard" style="display:none">
+            <li class="symbol"><span class="off">`</span><span class="on">~</span></li>
+            <li class="symbol"><span class="off"><img src="1.png" height="40px" width="40px"></span><span
+                    class="on">!</span></li>
+            <li class="symbol"><span class="off"><img src="2.png" height="40px" width="40px"></span><span
+                    class="on">@</span></li>
+            <li class="symbol"><span class="off"><img src="3.png" height="40px" width="40px"></span><span
+                    class="on">#</span></li>
+            <li class="symbol"><span class="off"><img src="4.png" height="40px" width="40px"></span><span
+                    class="on">$</span></li>
+            <li class="symbol"><span class="off"><img src="5.png" height="40px" width="40px"></span><span
+                    class="on">%</span></li>
+            <li class="symbol"><span class="off"><img src="6.png" height="40px" width="40px"></span><span
+                    class="on">^</span></li>
+            <li class="symbol"><span class="off"><img src="7.png" height="40px" width="40px"></span><span
+                    class="on">&amp;</span></li>
+            <li class="symbol"><span class="off"><img src="8.png" height="40px" width="40px"></span><span
+                    class="on">*</span></li>
+            <li class="symbol"><span class="off"><img src="9.png" height="40px" width="40px"></span><span
+                    class="on">(</span></li>
+            <li class="symbol"><span class="off"><img src="0.png" height="40px" width="40px"></span><span
+                    class="on">)</span></li>
+            <li class="symbol"><span class="off">-</span><span class="on">_</span></li>
+            <li class="symbol"><span class="off">=</span><span class="on">+</span></li>
+            <li class="delete lastitem">delete</li>
+            <li class="tab">tab</li>
+            <li class="letter"><img src="q.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="w.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="e.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="r.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="t.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="y.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="u.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="i.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="o.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="p.png" height="40px" width="40px"></li>
+            <li class="symbol"><span class="off">[</span><span class="on">{</span></li>
+            <li class="symbol"><span class="off">]</span><span class="on">}</span></li>
+            <li class="symbol lastitem"><span class="off">\</span><span class="on">|</span></li>
+            <li class="capslock">caps lock</li>
+            <li class="letter"><img src="a.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="s.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="d.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="f.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="g.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="h.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="j.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="k.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="l.png" height="40px" width="40px"></li>
+            <li class="symbol"><span class="off">;</span><span class="on">:</span></li>
+            <li class="symbol"><span class="off">'</span><span class="on">&quot;</span></li>
+            <li class="enter lastitem">enter</li>
+            <li class="left-shift">shift</li>
+            <li class="letter"><img src="z.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="x.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="c.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="v.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="b.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="n.png" height="40px" width="40px"></li>
+            <li class="letter"><img src="m.png" height="40px" width="40px"></li>
+            <li class="symbol"><span class="off">,</span><span class="on">&lt;</span></li>
+            <li class="symbol"><span class="off">.</span><span class="on">&gt;</span></li>
+            <li class="symbol"><span class="off">/</span><span class="on">?</span></li>
+            <li class="right-shift lastitem">shift</li>
+            <li class="space lastitem">space&nbsp;</li>
+        </ul>
+    </div>
+    <br><br><br><br><br><br>
+    <input type="checkbox" name="enable_keyboard" onclick="showKeyboard()" id="enable_keyboard"> Enable On-Screen Keyboard
+
+    <br><br>
+    <p><button class="btn btn-lg btn-danger" value="play" onclick="play(0)" style="opacity:0.5"><a  id="a" href="#"  style="margin-top:5px; float:left">PLAY THE MESSAGE</a></button></p>
+    <button class="mi fa fa-microphone" onclick="startDictation()"></button>
+    <button class="mi fa fa-volume-up" onclick="hear()"></button>
+    <script src="index.js"></script>
+  </div>
+
+	
+	<input type="button" id="datasend" value="send" />
+</div>
+</body>
